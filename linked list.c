@@ -55,9 +55,46 @@ insert_mid()
     printf("\n enter data to be insert \n");
     scanf("%d",&data);
     temp->data=data;
-    
-    
-    
+    p=start;
+    for(int i=1;i<pos;i++)
+    {  p=p->link;
+     if(p->link==NULL)
+     {
+         printf("\n postion out of bound \n");
+         return ;
+     }
+    }
+    q=p->link;
+    p->link=temp;
+    temp->link=q;
+}
+void insert_end()
+{   int n,data;
+    struct node *temp,*p;
+    temp=(struct node *)malloc(sizeof(struct node));
+    if(temp==NULL)
+    {
+        printf("\n space not avaliable right now\n");
+        return ;
+    }
+    if(start==NULL)
+    {
+        printf("\nlist is empty \n");
+        printf(" do you want to insert data at first enter 1 \n");
+        scanf("%d",&n);
+        if(n===1)
+        {   printf("enter value to insert \n");
+            scanf("%d",&data);
+            temp->data=data;
+            start=temp;
+        }
+    }
+    p=start;
+    while(p->link!=NULL)
+    {
+        p->link=p->link;
+    }
+    p->link=temp;
 }
 void main()
 {   int n,data;
@@ -79,7 +116,13 @@ void main()
                         case 1:  insert_front(data);
                                  break;
                         case 2: insert_mid();
+                                break;
+                        case 3: insert_end();
+                                break;
+                        default: printf("\n enter valid input \n ");
                     }
+                    break;
+            case 2: 
         }
     }
 }
