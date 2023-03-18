@@ -109,34 +109,42 @@ void del_start()
     temp=start;
      start=start->link;
      free(temp);
-     printf("\n item delete succesfully");
+     printf("\n item delete succesfully\n");
     }
 void del_item()
 {
     int item;
-    struct node *temp;
+    struct node *temp,*q;
     printf("enter item to be delete \n");
     scanf("%d",&item);
     temp=start;
     while(temp!=NULL)
     {
-        if(item==temp->link->data)
-        break;
+        if(temp->link->data==item)
+       {
+           q=temp->link;
+          temp->link=q->link;
+           free(q);
+               printf("\n item delete succesfully\n");
+               return ;
+       }
         temp=temp->link;
     }
-    temp=temp->link->link;
-    free(temp);
+  //  temp=temp->link->link;
+    //free(temp);
+ 
 }
 void del_end()
 {
-    struct node *temp;
+    struct node *temp,*q;
     temp=start;
     while(temp->link!=NULL)
-    {
+    {   q=temp;
         temp=temp->link;
     }
+    q->link=NULL;
     free(temp);
-    printf("item deleted succesfully\n");
+    printf("\nitem deleted succesfully\n");
 }
 void display()
 {
@@ -187,16 +195,18 @@ void main()
                     printf("enter 1 for delete from start\n");
                     printf("enter 2 for delete a given item\n");
                     printf("enter 3 for delete from end \n");
+                    scanf("%d",&l);
                     switch(l)
-                    {
-                        case 1: del_start();
+                         {
+                             case 1: del_start();
                                 break;
-                        case 2:del_item();
+                            case 2:del_item();
                                 break;
-                        case 3:del_end();
+                            case 3:del_end();
                                 break;
-                        default: printf("\nenter the valid input \n");
-                    }
+                            default: printf("\nenter the valid input \n");
+                                break;
+                        }
                     }
                     break;
             case 3: display();
