@@ -11,7 +11,7 @@ void insert_front(int data)
    temp=(struct node *)malloc(sizeof(struct node));
    if(temp==NULL)
    {
-       printf("\n space not avaliable right now \n");
+       printf("\n space not  available right now \n");
        return ;
    }
     printf("\n enter to be insert in fornt \n");
@@ -49,7 +49,7 @@ void insert_mid()
         else 
             return ;
     }
-    printf("enter the postion where you want to insert item\n ");
+    printf("enter the position where you want to insert item\n ");
     scanf("%d",&pos);
     printf("\n enter data to be insert \n");
     scanf("%d",&data);
@@ -61,7 +61,7 @@ void insert_mid()
         p=p->link;
      if(p->link==NULL)
      {
-         printf("\n postion out of bound \n");
+         printf("\n position out of bound \n");
          return ;
      }
     }
@@ -77,7 +77,7 @@ void insert_end()
     temp=(struct node *)malloc(sizeof(struct node));
     if(temp==NULL)
     {
-        printf("\n space not avaliable right now\n");
+        printf("\n space not available right now\n");
         return ;
     }
     else 
@@ -109,7 +109,7 @@ void del_start()
     temp=start;
      start=start->link;
      free(temp);
-     printf("\n item delete succesfully\n");
+     printf("\n item delete successfully\n");
     }
 void del_item()
 {
@@ -125,7 +125,7 @@ void del_item()
            q=temp->link;
           temp->link=q->link;
            free(q);
-               printf("\n item delete succesfully\n");
+               printf("\n item delete successfully\n");
                return ;
        }
         temp=temp->link;
@@ -144,7 +144,7 @@ void del_end()
     }
     q->link=NULL;
     free(temp);
-    printf("\nitem deleted succesfully\n");
+    printf("\nitem deleted successfully \n");
 }
 void display()
 {
@@ -157,6 +157,33 @@ void display()
     }
     printf("\n");
 }
+void reverse()
+{  struct node *q1,*q2,*q3;
+    if(start==NULL)
+    {
+        printf("\n listed is empty :-)");
+        return ;
+    }
+    q1=start;
+    if(q1->link==NULL)
+    {
+        printf("list has only one element :-)");
+        return ;
+    }
+    q2=q1->link;
+    q3=q2->link;
+    q1->link=NULL;
+    q2->link=q1;
+    while(q3->link!=NULL)
+    {
+        q1=q2;
+        q2=q3;
+        q3=q3->link;
+        q2->link=q1;
+    }
+    start=q2;
+    printf("\nlist is reverse successfully\n");
+}
 void main()
 {   int n,data;
     while(1)
@@ -164,7 +191,8 @@ void main()
         printf("Enter 1 for insertion in linked list\n");
         printf("Enter 2 for deletion in linked list \n");
         printf("Enter 3 for display list \n");
-        printf("Enter 4 for exit from program\n");
+        printf("Enter 4 for reverse the linked list \n");
+        printf("Enter 5 for exit from program\n");
         scanf("%d",&n);
         switch(n)
         {
@@ -211,7 +239,9 @@ void main()
                     break;
             case 3: display();
                     break;
-            case 4 : exit(0);
+            case 4: reverse();
+                    break;
+            case 5 : exit(0);
                     break;
             default: printf("enter valid input\n");
             break;
