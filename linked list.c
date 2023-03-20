@@ -184,6 +184,33 @@ void reverse()
     start=q2;
     printf("\nlist is reverse successfully\n");
 }
+void sort()
+{
+    struct node *q1;//*q2,*q3;
+    struct node *q2;
+    int temp;
+   // struct node *q3;
+    q1=start;
+    //q2=q1->link;
+   // for(;q1->link->link!=NULL;q1=q1->link)
+   while(q1->link!=NULL)
+    {   q2=q1->link;
+        while(q2!=NULL)
+       // for(;q2->link!=NULL;q2=q2->link)
+        {
+            if(q2->data<q1->data)
+            {
+                temp=q2->data;
+                q2->data=q1->data;
+                q1->data=temp;
+            }
+            q2=q2->link;
+        }
+        q1=q1->link;
+      // q2=q2->link;
+    }
+    printf("list is sorted \n");
+}
 void main()
 {   int n,data;
     while(1)
@@ -192,7 +219,8 @@ void main()
         printf("Enter 2 for deletion in linked list \n");
         printf("Enter 3 for display list \n");
         printf("Enter 4 for reverse the linked list \n");
-        printf("Enter 5 for exit from program\n");
+        printf("enter 5 for sorting thhe linked list \n");
+        printf("Enter 6 for exit from program\n");
         scanf("%d",&n);
         switch(n)
         {
@@ -241,7 +269,9 @@ void main()
                     break;
             case 4: reverse();
                     break;
-            case 5 : exit(0);
+            case 5: sort();
+                    break;
+            case 6 : exit(0);
                     break;
             default: printf("enter valid input\n");
             break;
