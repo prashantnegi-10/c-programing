@@ -269,7 +269,18 @@ void main()
                     break;
             case 4: reverse();
                     break;
-            case 5: sort();
+            case 5:   if(start==NULL)
+                   {
+                       printf("\n list is empty :-) \n");
+                       break;
+                   }
+                   else
+                   if(start->link==NULL)
+                   {
+                       printf("list has only one element :-)\n");
+                   }
+                   else
+                    sort();
                     break;
             case 6 : exit(0);
                     break;
