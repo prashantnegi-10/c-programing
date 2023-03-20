@@ -6,8 +6,24 @@ struct node
     struct node *link;
 };
 struct node *start=NULL;
-void insert_front(int data)
-{  struct node *temp;
+void create()
+{   struct node *temp;
+     temp=(struct node *)malloc(sizeof(struct node));
+     if(temp==NULL)
+     {
+         printf("Memory not available right now \n");
+         return ;
+     }
+     else 
+    printf("Enter the First Element of the linked list \n");
+    scanf("%d",&temp->data);
+    start=temp;
+    printf("First Element of linked inserted\n");
+}
+void insert_front()
+{  
+    int data;
+    struct node *temp;
    temp=(struct node *)malloc(sizeof(struct node));
    if(temp==NULL)
    {
@@ -28,7 +44,24 @@ void insert_front(int data)
         }
 }
 void insert_mid()
-{   int data,pos,t;
+{   int data,pos,t,count=1;
+  printf("enter the position where you want to insert item\n ");
+    scanf("%d",&pos);
+    struct node *kount=start;
+    while(kount!=NULL)
+  // for(kount=start;kount->link!=NULL;kount=kount->link)
+    {
+        
+        kount=kount->link;
+        count++;
+    }
+  //  printf("%d",count);
+    if(count<pos)
+    {
+        printf("Enter position out of bound please recheck using diplay functionality\n");
+        return ;
+    }
+    else {
     struct node * temp,*q,*p;
     temp=(struct node*)malloc(sizeof(struct node));
     if(temp==NULL)
@@ -36,21 +69,6 @@ void insert_mid()
         printf("\n memory not available right now \n");
         return ;
     }
-    if(start==NULL)
-    {
-        printf("list is empty \n do you want to insert item at first enter 1 \n");
-        scanf("%d",&t);
-        if(t==1)
-        { printf("\n enter the data item \n ");
-          scanf("%d",&data);
-          temp->data=data;
-          start=temp;
-        }
-        else 
-            return ;
-    }
-    printf("enter the position where you want to insert item\n ");
-    scanf("%d",&pos);
     printf("\n enter data to be insert \n");
     scanf("%d",&data);
     temp->data=data;
@@ -59,17 +77,18 @@ void insert_mid()
     { 
         q=p;
         p=p->link;
-     if(p->link==NULL)
+  /*   if(p->link==NULL)
      {
          printf("\n position out of bound \n");
          return ;
-     }
+     }*/
     }
    // q=p->link;
    q->link=temp;
     //p->link=temp;
     temp->link=p;
     //temp->link=q;
+}
 }
 void insert_end()
 {   int n,data;
@@ -214,24 +233,39 @@ void sort()
 void main()
 {   int n,data;
     while(1)
-    {
-        printf("Enter 1 for insertion in linked list\n");
-        printf("Enter 2 for deletion in linked list \n");
-        printf("Enter 3 for display list \n");
-        printf("Enter 4 for reverse the linked list \n");
-        printf("enter 5 for sorting thhe linked list \n");
-        printf("Enter 6 for exit from program\n");
+    {   printf("Enter 1 for creating in linkrd list\n");
+        printf("Enter 2 for insertion in linked list\n");
+        printf("Enter 3 for deletion in linked list \n");
+        printf("Enter 4 for display list \n");
+        printf("Enter 5 for reverse the linked list \n");
+        printf("enter 6 for sorting thhe linked list \n");
+        printf("Enter 7 for exit from program\n");
         scanf("%d",&n);
         switch(n)
-        {
-            case 1: int k;
+        {    case 1: if(start!=NULL) 
+                      {
+                          printf("\nYou already created the linked list\n");
+                        
+                      }
+                 else
+                    create();
+                    break;
+            case 2: if(start==NULL)
+                    {   int c;
+                        printf("\n you not create linkde list ....do you want to create enter 1\n");
+                        scanf("%d",&c);
+                        if(c==1)
+                        create();
+                    }
+                    else {
+                    int k;
                    { printf("\nenter 1 for insert in front of list\n");
                     printf("enter 2 for insert at any postion \n");
                     printf("enter 3 for insert in end of list\n");
                     scanf("%d",&k);
                     switch(k)
                     {
-                        case 1:  insert_front(data);
+                        case 1:  insert_front();
                                  break;
                         case 2: insert_mid();
                                 break;
@@ -239,11 +273,13 @@ void main()
                                 break;
                         default: printf("\n enter valid input \n ");
                    }
+                   }
+                    }
                     break;
-            case 2: int l;
+            case 3: int l;
                      if(start==NULL)
                    {
-                       printf("list is empty\n");
+                       printf("list is empty :-) \n");
                        break;
                    }
                    else
@@ -265,11 +301,11 @@ void main()
                         }
                     }
                     break;
-            case 3: display();
+            case 4: display();
                     break;
-            case 4: reverse();
+            case 5: reverse();
                     break;
-            case 5:   if(start==NULL)
+            case 6:   if(start==NULL)
                    {
                        printf("\n list is empty :-) \n");
                        break;
@@ -282,12 +318,12 @@ void main()
                    else
                     sort();
                     break;
-            case 6 : exit(0);
+            case 7 : exit(0);
                     break;
             default: printf("enter valid input\n");
             break;
                     
-        }
+        
     }
 }
 }
