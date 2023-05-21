@@ -19,10 +19,11 @@ void creat()
     }
     printf("\n Enter data to insert ");
     scanf("%d",&temp->data);
+        temp->prev=NULL;
+    temp->next=NULL;
     start=temp;
     last=temp;
-    temp->prev=NULL;
-    temp->next=NULL;
+    printf("\nsuccessfully created ");
 }
 void insrtbeg()
 { struct node *temp;
@@ -79,7 +80,9 @@ void insrtpos()
     temp->prev=q->prev;
     temp->next=q;
     q->prev->next=temp;
-    printf("\n %d --%d--%d",q->data,temp->data,q->prev->data);
+    q->prev=temp;
+     printf("\n Data inserted successfuly");
+   // printf("\n %d --%d--%d",q->data,temp->data,q->prev->data);
 }
 void insrtspec()
 {
@@ -115,41 +118,40 @@ void insrtspec()
     {    printf("\nEnter data");
     scanf("%d",&temp->data);
     q=start;
-    for(int i=1;i<=count;i++)
+    for(int i=1;i<count;i++)
     {
         q=q->next;
     }
-  
-    
     temp->prev=q->prev;
     temp->next=q;
+    q->prev->next=temp;
     q->prev=temp;
-   
+    printf("\n Data inserted successfuly");
     }
     else
     if(l==2)
     {       printf("\nEnter data");
     scanf("%d",&temp->data);
     q=start;
-     for(int i=1;i<=count+1;i++)
+     for(int i=1;i<=count;i++)
     {
         q=q->next;
     }
-  
-    
+    struct node *z=q->prev;
+   // printf("\n%d--%d--%d",start->data,start->next->data,start->next//->next->data);
+   // printf("\n %d--%d--%d",q->data,q->prev->data,z->data);
     temp->prev=q->prev;
     temp->next=q;
+    q->prev->next=temp;
     q->prev=temp;
-
+      //  printf("\n%d--%d--%d\n",temp->prev->data,temp->data,q->data);
+       printf("\n Data inserted successfuly");
     }
     else
     {
         printf("\n You selected wrong choise");
     
     }
-        return;
-    
-    
 }
 void instlast()
 {    struct node *temp,*q;
@@ -169,6 +171,7 @@ void instlast()
     q->next=temp;
     temp->prev=q;
     temp->next=NULL;
+     printf("\n Data inserted successfuly");
 }
 void delbeg()
 {
@@ -176,6 +179,7 @@ void delbeg()
     start=q->next;
     start->prev=NULL;
     free(q);
+    printf("\n Deleted successfully");
 }
 void delpos()
 {
@@ -210,6 +214,7 @@ void delpos()
   free(q);
   if(p->next==NULL)
   last=p;
+      printf("\n Deleted successfully");
 }
 void delspe()
 {
@@ -243,6 +248,7 @@ void delspe()
    p->next=q->next;
    q->next->prev=p;
    free(q);
+       printf("\n Deleted successfully");
 }
 
 void dellast()
@@ -256,10 +262,12 @@ void dellast()
     temp->next=NULL;
     free(q);
   last=temp;
+      printf("\n Deleted successfully");
 }
 void  disp()
 {
     struct node *q=start;
+    printf("\n doubly linked list \n");
     while(q!=NULL)
     {
         printf("#%d#",q->data);
@@ -276,7 +284,7 @@ void main()
         printf("\n Enter 2 for insertion ");
         printf("\n Enter 3 for Deletion ");
         printf("\n Enter 4 for display");
-        printf("\n Enter 5 for exit ");
+        printf("\n Enter 5 for exit \n");
         scanf("%d",&k);
         switch(k)
         {
@@ -285,7 +293,7 @@ void main()
                     break;
             }
             else{
-                printf("\n You already created, please select other operation ");
+                printf("\n You already created, please select other operation\n ");
                 break;
             }
             case 2: 
@@ -295,7 +303,7 @@ void main()
                   printf("\n Enter 1 for insert at beginning ");
                   printf("\n Enter 2 for insert specfic position ");
                   printf("\n Enter 3 for inset after specific item");
-                  printf("\n Enter 4 for insert at last");
+                  printf("\n Enter 4 for insert at last\n");
                   scanf("%d",&m);
                   switch(m)
                   {  case 1: insrtbeg();
@@ -307,12 +315,12 @@ void main()
                        case 4:instlast();
                               break;
                        default :
-                       printf("\n You Entered wrong choise");
+                       printf("\n You Entered wrong choise\n");
                        break;
                   }
                     }
                     else {
-                        printf("\n Please first create the doubly linked list");
+                        printf("\n Please first create the doubly linked list\n");
                     }
                     break;
                 case 3: if(start!=NULL)
@@ -320,7 +328,7 @@ void main()
                       printf("\n Enter 1 for deletion at beginning ");
                   printf("\n Enter 2 for deletion specfic position ");
                   printf("\n Enter 3 for deletion after specific item");
-                  printf("\n Enter 4 for deletion at last");
+                  printf("\n Enter 4 for deletion at last\n");
                   scanf("%d",&d);
                   switch(d){
                       case 1:delbeg();
@@ -331,13 +339,13 @@ void main()
                              break;
                       case 4: dellast();
                                  break;
-                      default : printf("\n You Entered wrong choice");
+                      default : printf("\n You Entered wrong choice\n");
                          break;
                   }
                     
                 }
                 else
-                printf("\n Please first create the list");
+                printf("\n Please first create the list\n");
                 break;
           case 4: disp();
                     break;
